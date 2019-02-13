@@ -51,7 +51,7 @@ class PanierController extends Controller
             $panier[$id]=1;
         }
         $session->set('panier',$panier);
-        $this->get('session')->getFlashBag()->add('success','produit ajouté avec succès');
+        $this->get('session')->getFlashBag()->add('success','Article successfully added to cart');
        return $this->redirect($this->generateUrl('panier'));
     }
 
