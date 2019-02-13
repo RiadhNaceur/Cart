@@ -1,0 +1,54 @@
+{% extends "::layout/base.html.twig" %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <h2>Delivery</h2>
+                <div id="collapseOne" class="accordion-body collapse in">
+                    <div class="accordion-inner">
+                        <div class="span4">
+                            {% if user.adresses|length != 0 %}
+                            <form action="{{ path('validation') }}">
+                                <h4>Delivery Address</h4>
+                                {% for adresse in user.adresses %}
+                                <label class="radio">
+                                    <input type="radio" name="facturation"  value="{{ adresse.id }}"
+                                           checked="">
+                                    {{ adresse.adresse }}, {{ adresse.cp }}, {{ adresse.ville }} - {{ adresse.pays }}
+                                    <br>{{ adresse.prenom }} {{ adresse.nom }}<a href="{{ path('adrSupp', {'id':adresse.id}) }}"><i class="icon-trash"></i></a>
+                                </label>
+                                {% endfor %}
+                                 <br/>
+
+                                <h4>Billing Address</h4>
+                                {% for adresse in user.adresses %}
+                                    <label class="radio">
+                                        <input type="radio" name="livraison"  value="{{ adresse.id }}"
+                                               checked="">
+                                        {{ adresse.adresse }}, {{ adresse.cp }}, {{ adresse.ville }} - {{ adresse.pays }}
+                                        <br>{{ adresse.prenom }} {{ adresse.nom }}<a href="{{ path('adrSupp', {'id':adresse.id}) }}"><i class="icon-trash"></i></a>
+                                    </label>
+                                {% endfor %}
+                                <br/>
+
+                                <button class="btn btn-primary">Validate Addresses</button>
+                            </form>
+                            {% endif %}
+                        </div>
+
+
+                        <div class="span4 offset2">
+                            <h4>Add new address</h4>
+                            <form action="{{ path('livraison') }}" method="post">
+                                {{ form_widget(form) }}
+                                <button class="btn btn-primary">Add</button>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+{% endblock %}

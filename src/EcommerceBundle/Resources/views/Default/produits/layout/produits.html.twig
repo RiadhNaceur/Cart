@@ -1,0 +1,51 @@
+{% extends "::layout/base.html.twig" %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="span3">
+                {% include '::modulesUsed/navigation.html.twig' %}
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    {% include 'UsersBundle:Default:modulesUsed/usersConnecte.html.twig' %}
+                {% else %}
+                     {% include 'UsersBundle:Default:modulesUsed/users.html.twig' %}
+                {% endif %}
+                {{ render(controller('EcommerceBundle:Panier:menu')) }}
+            </div>
+            <div class="span9">
+                {% if produits|length != 0 %}
+                <ul class="thumbnails">
+                    {% for produit in produits %}
+                        <li class="span3">
+                            <div class="thumbnail">
+                                <img src="{{ asset('' ~ produit.image.path ~ '') }}" alt="Diverta" width="300" height="300">
+                                <div class="caption">
+                                    <h4>{{ produit.nom }}</h4>
+                                    <p>{{ produit.prix|tva(produit.tva.multiplicate) }}$</p>
+                                    <a class="btn btn-primary" href="{{ path('presentation', {'id' : produit.id}) }}">More Infos</a>
+                                    {% if panier[produit.id] is not defined %}
+                                    <a class="btn btn-success" style="display: inline; padding: 6px;" href={{ path('ajouter', {'id': produit.id}) }}>Add to cart</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <div class="pagination">
+                    <ul>
+                        <li class="disabled"><span>Previous</span></li>
+                        <li class="disabled"><span>1</span></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#">Next</a></li>
+                    </ul>
+                </div>
+                {% else %}
+                    No articles
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

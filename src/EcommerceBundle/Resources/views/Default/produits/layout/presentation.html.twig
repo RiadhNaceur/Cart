@@ -1,0 +1,41 @@
+{% extends "::layout/base.html.twig" %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="span3">
+                {% include '::modulesUsed/navigation.html.twig' %}
+            </div>
+            <div class="span9">
+                <div class="row">
+                    <div class="span5">
+                        <img src="{{ asset('' ~ produit.image.path ~ '') }}" alt="Diverta" width="470" height="310">
+                    </div>
+
+                    <div class="span4">
+                        <h4>{{ produit.nom }}</h4>
+                        <p>{{ produit.description }}</p>
+                        <h4>{{ produit.prix }}€</h4>
+                        {% if panier[produit.id] is not defined %}
+                        <form action="{{ path('ajouter', {'id': produit.id}) }}">
+                            <select name="qte" class="span1">
+                                {% for i in 1..10 %}
+                                <option value="{{ i }}">{{ i }}</option>
+                                {% endfor %}
+                            </select>
+
+                            <div>
+                                <button class="btn btn-primary">Add to cart</button>
+                            </div>
+                        </form>
+                            {% else %}
+                                <a href="{{ path('panier') }}" class="btn btn-primary">The article is already in cart</a>
+                            {% endif %}
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

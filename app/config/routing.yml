@@ -1,0 +1,12 @@
+users:
+    resource: "@UsersBundle/Resources/config/routing.yml"
+    prefix:   /
+
+page:
+    resource: "@PageBundle/Resources/config/routing.yml"
+    prefix:   /
+
+ecommerce:
+    resource: "@EcommerceBundle/Resources/config/routing.yml"
+    prefix:   /
+
