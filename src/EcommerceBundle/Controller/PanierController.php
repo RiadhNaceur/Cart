@@ -61,7 +61,7 @@ class PanierController extends Controller
         $panier = $session->get('panier');
         unset($panier[$id]);
         $session->set('panier',$panier);
-        $this->get('session')->getFlashBag()->add('success','produit supprimé avec succès');
+        $this->get('session')->getFlashBag()->add('success','Article successfully deleted from cart');
         return $this->redirect($this->generateUrl('panier'));
     }
 
