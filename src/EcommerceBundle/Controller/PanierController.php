@@ -92,6 +92,14 @@ class PanierController extends Controller
 
     public function validationAction()
     {
-        return $this->render('EcommerceBundle:Default:panier/layout/validation.html.twig');
+
+        $session = $this->get('session');
+        if (!$session->has('panier')) $session->set('panier', array());
+        $em = $this->getDoctrine()->getManager();
+        $produits = $em->getRepository('EcommerceBundle:Produits')->findArray(array_keys($session->get('panier')));
+
+        return $this->render('EcommerceBundle:Default:panier/layout/validation.html.twig', array('produits' => $produits,
+                                                                                'panier' => $session->get('panier')));
+        //return $this->render('EcommerceBundle:Default:panier/layout/validation.html.twig');
     }
 }
