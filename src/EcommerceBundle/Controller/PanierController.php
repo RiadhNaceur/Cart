@@ -100,6 +100,5 @@ class PanierController extends Controller
 
         return $this->render('EcommerceBundle:Default:panier/layout/validation.html.twig', array('produits' => $produits,
                                                                                 'panier' => $session->get('panier')));
-        //return $this->render('EcommerceBundle:Default:panier/layout/validation.html.twig');
     }
 }
