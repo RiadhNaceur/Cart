@@ -7,8 +7,8 @@ parameters:
     database_password:
     mailer_transport: smtp
     mailer_host: 127.0.0.1
-    mailer_user: naceurriadh@gmail.com
-    mailer_password: watachiwa_Riadh_desu
+    mailer_user:
+    mailer_password:
     secret: ThisTokenIsNotSoSecretChangeIt
 twig:
     globals:
